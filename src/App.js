@@ -1,14 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
 import HomePage from './components/Home';
-import Navbar from './components/Navbar';
 import {Routes, Route} from "react-router-dom";
-
+import LoginComponent from './components/LoginComponent';
+import Footer from './utils/Footer'
+import RegisterComponent from './components/RegisterComponent';
 function App() {
   return (
     <div className="App">
-      <HomePage></HomePage>
-      {/* <Navbar/> */}
+
+      <Routes>
+              <Route path="/home" element={<HomePage/>}/>
+              <Route path="/" element={<HomePage/>}/>
+              <Route path="/login" element={<LoginComponent/>} />
+              <Route path="/register" element={<RegisterComponent/>} />
+      </Routes>
+      <Footer/>
     </div>
   );
 }
