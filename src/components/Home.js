@@ -21,21 +21,6 @@ const books = [
 ];
 
 const HomePage = () => {
-  const [open, setOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const goToLogin = () => navigate('/login');
-  const goToRegister = () => navigate('/register');
-
-  const handleSearchChange = (event) => setSearchTerm(event.target.value);
-
-  const handleSearch = () => console.log(`Searching for: ${searchTerm}`);
-  const navigate = useNavigate(); 
-
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
   const handleRowClick = (bookName) => {
     console.log(`Clicked on book: ${bookName}`);
     // send to auhtor 
@@ -43,8 +28,8 @@ const HomePage = () => {
 
 return (
          <div style={{ backgroundColor: '#e8f5e9' }}> 
-          <TopAppBar toggleDrawer={toggleDrawer} goToLogin={goToLogin} goToRegister={goToRegister} />
-          <AppDrawer open={open} toggleDrawer={toggleDrawer} searchTerm={searchTerm} handleSearchChange={handleSearchChange} handleSearch={handleSearch} />
+          <TopAppBar/>
+          <AppDrawer/>
           <Container maxWidth="md" style={{marginTop:'20x'}}>
             <Grid container spacing={4}>
               <Grid item xs={12} sm={4}>

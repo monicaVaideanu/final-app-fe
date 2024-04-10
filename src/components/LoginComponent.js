@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {Typography, Button, Box, Container, TextField, IconButton, Paper } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import TopAppBar from '../utils/TopAppBar'
+import AppDrawer from '../utils/AppDrawer';
 
 const LoginComponent = () => {
   const [username, setUsername] = useState('');
@@ -15,8 +17,9 @@ const LoginComponent = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#e8f5e9', minHeight: '100vh' }}>
-
+    <div style={{ backgroundColor: '#e8f5e9' }}> 
+    <TopAppBar/>
+    <AppDrawer/>
       <Container maxWidth="xs" style={{ marginTop: '20px' }}>
         <Paper elevation={3} style={{ padding: '20px' }}>
           <Typography variant="h5" sx={{ mb: 2 }}>Login</Typography>
