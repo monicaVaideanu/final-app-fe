@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
 import { Radio, RadioGroup, FormControlLabel, FormControl, FormLabel, Button } from '@mui/material';
+//add checkbox from https://mui.com/material-ui/react-checkbox/
 
 const RegisterComponent = () => {
   const [password, setPassword] = useState('');

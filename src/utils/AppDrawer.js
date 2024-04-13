@@ -5,18 +5,22 @@ import PeopleIcon from '@mui/icons-material/People';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AppDrawer = () => {
     const [open, setOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const handleSearchChange = (event) => setSearchTerm(event.target.value);
-
+    const navigate = useNavigate();
+    
     const handleSearch = () => console.log(`Searching for: ${searchTerm}`);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
+    const goToBooks = () => navigate('/books')
+    const goToAuthors = () => navigate('/authors')
     return (
         <>
             <IconButton onClick={toggleDrawer(true)} color="inherit" aria-label="open drawer">
@@ -41,11 +45,11 @@ const AppDrawer = () => {
                         />
                     </Box>
                     <List>
-                        <ListItem component={Link} to="/books">
+                        <ListItem onClick={goToBooks}>
                             <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
                             <ListItemText primary="Books" />
                         </ListItem>
-                        <ListItem component={Link} to="/authors">
+                        <ListItem onClick={goToAuthors}>
                             <ListItemIcon><PeopleIcon /></ListItemIcon>
                             <ListItemText primary="Authors" />
                         </ListItem>

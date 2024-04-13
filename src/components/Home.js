@@ -23,7 +23,7 @@ const books = [
 const HomePage = () => {
   const handleRowClick = (bookName) => {
     console.log(`Clicked on book: ${bookName}`);
-    // send to auhtor 
+    // send to book page  
   };
 
 return (

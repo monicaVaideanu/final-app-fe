@@ -44,7 +44,7 @@ function Footer() {
                 <p>{new Date().getFullYear()} GreatReadsApp</p>
                 <ul className="footer-links" style={styles.footerLinks}>
                     <li style={styles.listItem}>
-                        <a href="#" style={styles.linkWithIcon}>
+                        <a href="/about" style={styles.linkWithIcon}>
                             <InfoIcon style={{ marginRight: '10px' }}/>About us
                         </a>
                     </li>
@@ -55,7 +55,7 @@ function Footer() {
                         <SocialIcon url="https://facebook.com/" style={styles.socialIcon}/>Facebook
                     </li>
                     <li style={styles.listItem}>
-                        <a href="#" style={styles.linkWithIcon}>
+                        <a href="/contact" style={styles.linkWithIcon}>
                             <ContactPageIcon style={{ marginRight: '10px' }}/>Contact
                         </a>
                     </li>
