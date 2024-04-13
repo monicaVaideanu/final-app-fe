@@ -3,14 +3,16 @@ import {Box, MenuItem, TextField, Button, TableHead,Table, TableRow, TableCell} 
 import TopAppBar from '../utils/TopAppBar'
 import AppDrawer from '../utils/AppDrawer';
 
-const AuthorsComponent =() => {
+const AboutUsComponent =() => {
 
   return (
     <div style={{ backgroundColor: '#e8f5e9' }}> 
     <TopAppBar/>
     <AppDrawer/>
+        <Box> 
+        </Box>
     </div>
   )
 
 }
-export default AuthorsComponent;
+export default AboutUsComponent;

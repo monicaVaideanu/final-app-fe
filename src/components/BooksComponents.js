@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Box, MenuItem, TextField, Button, TableHead,Table, TableRow, TableCell} from '@mui/material';
+import TopAppBar from '../utils/TopAppBar'
+import AppDrawer from '../utils/AppDrawer';
 
 
 const BooksComponent = () => {
@@ -22,6 +24,9 @@ const BooksComponent = () => {
     
 
   return (
+    <div style={{ backgroundColor: '#e8f5e9' }}> 
+    <TopAppBar/>
+    <AppDrawer/>
     <Box sx ={{m : 4}}>
         <Box sx = {{mb: 2, display: 'flex', gap: 2}}>
             <TextField select label = "Genre" value ={genre} onChange = {(e) => setGenre(e.target.value)} fullWidth>
@@ -65,6 +70,7 @@ const BooksComponent = () => {
             </TableHead>
         </Table>
     </Box>
+    </div>
   )
 
 }
