@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Paper, Container, TableBody, TableCell, TableContainer, Table, TableHead, TableRow } from '@mui/material';
+import { Typography, Paper,Grid, Container, TableBody, TableCell, TableContainer, Table, TableHead, TableRow } from '@mui/material';
 import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
 import { getTopTen } from '../apis/GetData';
+import b1 from '../pictures/b1.jpg'
+import b2 from '../pictures/b2.webp'
+import b3 from '../pictures/b3.jpg'
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
@@ -24,6 +27,18 @@ const HomePage = () => {
       <TopAppBar />
       <AppDrawer />
       <Container maxWidth="md" style={{ marginTop: '20px' }}>
+      <Grid container spacing={4}>
+              <Grid item xs={12} sm={4}>
+                <img src={b1} alt= "" style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+              </Grid>
+              <Grid item xs={12} sm={4} >
+                  <img src={b2} alt= "" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </Grid>
+              <Grid item xs={12} sm={4}>
+                  <img src={b3} alt= "" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={4}>
         <Typography variant="h6" component="div" style={{ marginBottom: '20px' }}>
           Best Rated Books
         </Typography>
@@ -51,6 +66,7 @@ const HomePage = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        </Grid>
       </Container>
     </div>
   );
