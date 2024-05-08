@@ -1,15 +1,17 @@
-import React, { useState} from 'react';
-import {Typography, Button, Box, Container, TextField, IconButton, Paper } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Button, Box, Container, TextField, IconButton, Paper } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import TopAppBar from '../utils/TopAppBar'
+import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
 import axios from 'axios';
+
 const LoginComponent = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false); 
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -18,18 +20,21 @@ const LoginComponent = () => {
         username: username,
         password: password
       });
-      const jwt = response.data; // Presupunem că răspunsul conține tokenul JWT
-      console.log('JWT Token:', jwt);
-      // Aici poți salva JWT în local storage sau context pentru utilizare ulterioară
+      const jwt = response.data;  // Presupunem că răspunsul conține tokenul JWT
       localStorage.setItem('userToken', jwt);
+      console.log('JWT Token:', jwt);
+      setLoggedIn(true);
+      setError('');
     } catch (error) {
-      setError(error.response.data )
+      setLoggedIn(false);
+      setError(error.response.data || "Login failed. Please check your credentials.");
     }
   };
+
   return (
     <div style={{ backgroundColor: '#e8f5e9' }}> 
-    <TopAppBar/>
-    <AppDrawer/>
+      <TopAppBar />
+      <AppDrawer />
       <Container maxWidth="xs" style={{ marginTop: '20px' }}>
         <Paper elevation={3} style={{ padding: '20px' }}>
           <Typography variant="h5" sx={{ mb: 2 }}>Login</Typography>
@@ -68,9 +73,14 @@ const LoginComponent = () => {
                 ),
               }}
             />
-              {error && (
+            {error && (
               <Typography color="error" sx={{ mt: 2 }}>
                 {error}
+              </Typography>
+            )}
+            {loggedIn && (
+              <Typography color="primary" sx={{ mt: 2 }}>
+                Logged in successfully!
               </Typography>
             )}
             <Button
@@ -83,7 +93,6 @@ const LoginComponent = () => {
             </Button>
           </Box>
         </Paper>
-
       </Container>
     </div>
   );
