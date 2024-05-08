@@ -20,9 +20,11 @@ const LoginComponent = () => {
         username: username,
         password: password
       });
-      const jwt = response.data;  // Presupunem că răspunsul conține tokenul JWT
-      localStorage.setItem('userToken', jwt);
-      console.log('JWT Token:', jwt);
+      const { token, userId } = response.data; 
+      localStorage.setItem('userToken', token);
+      localStorage.setItem('userId', userId); 
+      console.log('JWT Token:', token);
+      console.log('User ID:', userId);
       setLoggedIn(true);
       setError('');
     } catch (error) {
