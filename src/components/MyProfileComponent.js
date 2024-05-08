@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
 import { Container, Table, TableBody, TableCell, TableHead, TableRow, Button, Select, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { getWishList, deleteFromWishList, updateStatusForBook, deleteAllWishListsByUser } from '../apis/GetData';
+import { getWishList, deleteFromWishList, updateStatusForBook, deleteAllWishListByUser } from '../apis/GetData';
 
 const ConfirmDialog = ({ open, handleClose, handleConfirm }) => {
   return (
@@ -73,7 +73,7 @@ const MyProfile = () => {
 
   const handleDeleteAll = async () => {
     try {
-        await deleteAllWishListsByUser(userId, token);
+        await deleteAllWishListByUser(userId, token);
         setDialogOpen(false);
         alert('The list has been deleted.');
         fetchWishBooks(); 
