@@ -4,7 +4,6 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import PeopleIcon from '@mui/icons-material/People';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const AppDrawer = () => {
@@ -27,7 +26,7 @@ const AppDrawer = () => {
                 <MenuIcon />
             </IconButton>
             <Drawer anchor='left' open={open} onClose={toggleDrawer(false)}>
-                <Box sx={{ width: 250, backgroundColor: '#b2dfdb' }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+                <Box sx={{ width: 250, backgroundColor: '#b2dfdb', cursor: 'pointer', }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
                     <Box sx={{ p: 2 }}>
                         <TextField
                             fullWidth

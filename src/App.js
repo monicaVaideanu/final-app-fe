@@ -6,6 +6,9 @@ import Footer from './utils/Footer'
 import RegisterComponent from './components/RegisterComponent';
 import AuthorsComponent from './components/AuthorsComponent'
 import BooksComponent from './components/BooksComponents';
+import MyProfile from './components/MyProfileComponent';
+import AboutUsComponent from './components/AboutUsComponent';
+import ContactComponent from './components/ContactComponent';
 function App() {
   return (
     <div className="App">
@@ -17,6 +20,9 @@ function App() {
               <Route path="/register" element={<RegisterComponent/>} />
               <Route path="/books" element={<BooksComponent/>} />
               <Route path="/authors" element={<AuthorsComponent/>} />
+              <Route path="/profile" element={<MyProfile/>} />
+              <Route path="/about" element={<AboutUsComponent/>} />
+              <Route path="/contact" element={<ContactComponent/>} />
       </Routes>
       <Footer/>
     </div>
