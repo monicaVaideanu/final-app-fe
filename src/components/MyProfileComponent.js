@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
-
+import {Container,  Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
+import TopAppBar from '../utils/TopAppBar';
+import AppDrawer from '../utils/AppDrawer';
 
 const MyProfile = () => {
   const { userId } = useParams(); // Presupunem că ID-ul utilizatorului este pasat ca un parametru de rută
@@ -49,7 +50,10 @@ const MyProfile = () => {
   
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#e8f5e9' }}>
+      <TopAppBar />
+      <AppDrawer />
+      <Container maxWidth="xs" style={{ marginTop: '20px' }}>
       <h1>My Profile - Wish and Read List</h1>
       <Table>
         <TableHead>
@@ -72,6 +76,7 @@ const MyProfile = () => {
           ))}
         </TableBody>
       </Table>
+      </Container>
     </div>
   );
 };
