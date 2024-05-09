@@ -4,6 +4,7 @@ import {
   Button, Select, MenuItem, Dialog, DialogActions, DialogContent,
   DialogContentText, DialogTitle, TextField
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
@@ -39,7 +40,8 @@ const MyProfile = () => {
   const [promotionDialogOpen, setPromotionDialogOpen] = useState(false);
   const [promotionData, setPromotionData] = useState({ description: '', country: '' });
   const userRole = localStorage.getItem('role');
-
+  const navigate = useNavigate();
+  
   const fetchWishBooks = async () => {
     try {
       const response = await getWishList(userId, token);
@@ -47,6 +49,9 @@ const MyProfile = () => {
     } catch (error) {
       setError(error.message);
     }
+  };
+  const handleUploadBook = () => {
+    navigate('/upload');
   };
   useEffect(() => {
     fetchWishBooks();
@@ -113,6 +118,11 @@ const MyProfile = () => {
         {userRole === 'READER' && (
           <Button onClick={() => setPromotionDialogOpen(true)} color="primary">
             Become an author
+          </Button>
+        )}
+        {(userRole === 'AUTHOR' || userRole === 'ADMIN') && (
+          <Button onClick={handleUploadBook} color="primary" variant="contained">
+            Upload a Book
           </Button>
         )}
         <Button onClick={() => setDialogOpen(true)} color="secondary">Delete all list</Button>

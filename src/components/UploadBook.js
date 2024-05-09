@@ -2,6 +2,8 @@ import React, { useState, useEffect} from 'react';
 import { Button, TextField, Container, Typography, Box, Input, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
 import { getCollections, getGenres, getLanguages } from '../apis/GetData';
+import TopAppBar from '../utils/TopAppBar';
+import AppDrawer from '../utils/AppDrawer';
 
 const UploadBook = () => {
     const [bookData, setBookData] = useState({
@@ -102,6 +104,9 @@ const UploadBook = () => {
     };
 
     return (
+        <div style={{ backgroundColor: '#e8f5e9' }}> 
+        <TopAppBar/>
+        <AppDrawer/>
         <Container component="main" maxWidth="sm">
             <Typography component="h1" variant="h5">Upload New Book</Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -237,6 +242,7 @@ const UploadBook = () => {
                 </Button>
             </Box>
         </Container>
+        </div>
     );
 };
 
