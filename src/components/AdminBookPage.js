@@ -6,22 +6,17 @@ const AdminBooksPage = () => {
 
   useEffect(() => {
     getAllBooks().then(response => {
-      // Filtrăm cărțile cu statutul PENDING
       const pendingBooks = response.data.filter(book => book.status === 'PENDING');
       setBooks(pendingBooks);
     }).catch(error => console.error('Error fetching books:', error));
   }, []);
 
   const handleAccept = (bookId) => {
-    // Implementează logica pentru a accepta o carte
     console.log(`Accept book with ID: ${bookId}`);
-    // Actualizează starea locală sau reîmprospătează lista după acceptare
   };
 
   const handleReject = (bookId) => {
-    // Implementează logica pentru a respinge o carte
     console.log(`Reject book with ID: ${bookId}`);
-    // Actualizează starea locală sau reîmprospătează lista după respingere
   };
 
   return (
