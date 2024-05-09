@@ -9,6 +9,7 @@ import BooksComponent from './components/BooksComponents';
 import MyProfile from './components/MyProfileComponent';
 import AboutUsComponent from './components/AboutUsComponent';
 import ContactComponent from './components/ContactComponent';
+import UploadBook from './components/UploadBook';
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,7 @@ function App() {
               <Route path="/profile" element={<MyProfile/>} />
               <Route path="/about" element={<AboutUsComponent/>} />
               <Route path="/contact" element={<ContactComponent/>} />
+              <Route path="/upload" element={<UploadBook/>} />
       </Routes>
       <Footer/>
     </div>
