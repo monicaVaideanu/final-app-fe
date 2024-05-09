@@ -4,6 +4,10 @@ const BASE_API_BOOKS = "http://localhost:8081/book";
 const BASE_API_BOOKS_LIST = "http://localhost:8081/books/list"
 
 export const getTopTen = () => axios.get(`${BASE_API_BOOKS}/top10books`);
+export const getAllBooks = () => axios.get(`${BASE_API_BOOKS}/all`);
+export const getGenres = () => axios.get(`${BASE_API_BOOKS}/getGenres`);
+export const getLanguages = () => axios.get(`${BASE_API_BOOKS}/getLanguages`);
+export const getCollections = () => axios.get(`${BASE_API_BOOKS}/getCollections`);
 
 export const getWishList = (userId, token) => {
     return axios.get(`${BASE_API_BOOKS_LIST}/user/${userId}`, {
