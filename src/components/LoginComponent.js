@@ -20,11 +20,15 @@ const LoginComponent = () => {
         username: username,
         password: password
       });
-      const { token, userId } = response.data; 
+      const { token, userId, role } = response.data; 
       localStorage.setItem('userToken', token);
       localStorage.setItem('userId', userId); 
-      console.log('JWT Token:', token);
-      console.log('User ID:', userId);
+      localStorage.setItem('role', role);
+      console.log(response.data);
+      console.log("Role?"+ localStorage.getItem("role"));
+      console.log("Setting localStorage - Role:", role);
+      localStorage.setItem('role', role);
+      console.log("Role stored in localStorage:", localStorage.getItem('role'));
       setLoggedIn(true);
       setError('');
     } catch (error) {

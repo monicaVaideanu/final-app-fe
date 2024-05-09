@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Container, Table, TableBody, TableCell, TableHead, TableRow,
+  Button, Select, MenuItem, Dialog, DialogActions, DialogContent,
+  DialogContentText, DialogTitle, TextField
+} from '@mui/material';
+
 import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
-import { Container, Table, TableBody, TableCell, TableHead, TableRow, Button, Select, MenuItem, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { getWishList, deleteFromWishList, updateStatusForBook, deleteAllWishListByUser } from '../apis/GetData';
+import {getWishList, deleteFromWishList, updateStatusForBook, deleteAllWishListByUser, promoteToAuthor} from '../apis/GetData';
 
-const ConfirmDialog = ({ open, handleClose, handleConfirm }) => {
-  return (
-      <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Please confirm or dismiss your action</DialogTitle>
-          <DialogContent>
-              <DialogContentText>
-                  Are you sure you want to delete all books from your list?
-              </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleConfirm} color="primary" autoFocus>
-                  Confirm
-              </Button>
-          </DialogActions>
-      </Dialog>
-  );
-};
+const ConfirmDialog = ({ open, handleClose, handleConfirm }) => (
+  <Dialog open={open} onClose={handleClose}>
+    <DialogTitle>Please confirm or dismiss your action</DialogTitle>
+    <DialogContent>
+      <DialogContentText>
+        Are you sure you want to delete all books from your list?
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={handleClose}>Cancel</Button>
+      <Button onClick={handleConfirm} color="primary" autoFocus>Confirm</Button>
+    </DialogActions>
+  </Dialog>
+);
 
 const formatDate = (dateString) => {
-  if (!dateString) {
-    return "N/A"; 
-  }
+  if (!dateString) return "N/A"; 
   const date = new Date(dateString);
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 };
@@ -37,6 +36,9 @@ const MyProfile = () => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [promotionDialogOpen, setPromotionDialogOpen] = useState(false);
+  const [promotionData, setPromotionData] = useState({ description: '', country: '' });
+  const userRole = localStorage.getItem('role');
 
   const fetchWishBooks = async () => {
     try {
@@ -46,9 +48,10 @@ const MyProfile = () => {
       setError(error.message);
     }
   };
-
   useEffect(() => {
     fetchWishBooks();
+    console.log("role myProfile" + userRole)
+    console.log("id" + userId)
   }, [userId]);
 
   const handleDeleteBook = async (bookId) => {
@@ -73,14 +76,30 @@ const MyProfile = () => {
 
   const handleDeleteAll = async () => {
     try {
-        await deleteAllWishListByUser(userId, token);
-        setDialogOpen(false);
-        alert('The list has been deleted.');
-        fetchWishBooks(); 
+      await deleteAllWishListByUser(userId, token);
+      setDialogOpen(false);
+      alert('The list has been deleted.');
+      fetchWishBooks(); 
     } catch (error) {
-        console.error('Failed to delete all wish lists', error);
-        alert('Error.');
+      console.error('Failed to delete all wish lists', error);
+      alert('Error.');
     }
+  };
+
+  const handlePromoteToAuthor = async () => {
+    try {
+      await promoteToAuthor(userId, token, promotionData);
+      setPromotionDialogOpen(false);
+      alert('Successfully promoted to author!');
+    } catch (error) {
+      console.error('Failed to promote to author', error);
+      alert('Failed to promote!');
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPromotionData(prevState => ({ ...prevState, [name]: value }));
   };
 
   const statusOptions = ['WISH', 'DONE_READING', 'READING'];
@@ -91,6 +110,11 @@ const MyProfile = () => {
       <AppDrawer />
       <Container maxWidth="xs" style={{ marginTop: '20px' }}>
         <h1>My Profile - Wish and Read List</h1>
+        {userRole === 'READER' && (
+          <Button onClick={() => setPromotionDialogOpen(true)} color="primary">
+            Become an author
+          </Button>
+        )}
         <Button onClick={() => setDialogOpen(true)} color="secondary">Delete all list</Button>
         <Table>
           <TableHead>
@@ -104,7 +128,7 @@ const MyProfile = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {books.map((book) => (
+            {Array.isArray(books) && books.map((book) => (
               <TableRow key={book.bookId.bookId}>
                 <TableCell>{book.bookId.name}</TableCell>
                 <TableCell>{(book.bookId.authors && book.bookId.authors.map(author => author.name).join(", ")) || "No authors listed"}</TableCell>
@@ -133,6 +157,34 @@ const MyProfile = () => {
           handleClose={() => setDialogOpen(false)}
           handleConfirm={handleDeleteAll}
         />
+        <Dialog open={promotionDialogOpen} onClose={() => setPromotionDialogOpen(false)}>
+          <DialogTitle>Become an author</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              name="description"
+              label="Author Description"
+              type="text"
+              fullWidth
+              value={promotionData.description}
+              onChange={handleChange}
+            />
+            <TextField
+              margin="dense"
+              name="country"
+              label="Country"
+              type="text"
+              fullWidth
+              value={promotionData.country}
+              onChange={handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setPromotionDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handlePromoteToAuthor} color="primary">Confirm</Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </div>
   );

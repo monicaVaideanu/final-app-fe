@@ -3,6 +3,7 @@ import { Box, MenuItem, TextField, Button, Table, TableHead, TableBody, TableRow
 import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
 import { getAllBooks, getCollections, getGenres, getLanguages } from '../apis/GetData';
+import Footer from '../utils/Footer';
 
 const BooksComponent = () => {
     const [genre, setGenre] = useState('');
@@ -17,22 +18,22 @@ const BooksComponent = () => {
 
     const handleSearch = () => {
         let filteredBooks = allBooks;
-
-        if (genre) {
-            filteredBooks = filteredBooks.filter(book => book.genres.some(g => g.name === genre));
+    
+        if (genre && genre !== 'All') {
+            filteredBooks = filteredBooks.filter(book => book.genres && book.genres.some(g => g.name === genre));
         }
-
-        if (collection) {
+    
+        if (collection && collection !== 'All') {
             filteredBooks = filteredBooks.filter(book => book.collectionName === collection);
         }
-
-        if (language) {
-            filteredBooks = filteredBooks.filter(book => book.languages.some(l => l.code === language));
+    
+        if (language && language !== 'All') {
+            filteredBooks = filteredBooks.filter(book => book.languages && book.languages.some(l => l.code === language));
         }
-
+    
         setDisplayBooks(filteredBooks);
     };
-
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -90,7 +91,6 @@ const BooksComponent = () => {
                             <MenuItem key={option} value={option}>{option}</MenuItem>
                         ))}
                     </TextField>
-
                     <TextField
                         select
                         label="Language"
@@ -102,7 +102,6 @@ const BooksComponent = () => {
                             <MenuItem key={option} value={option}>{option}</MenuItem>
                         ))}
                     </TextField>
-
                     <Button variant='contained' onClick={handleSearch}>Search Books</Button>
                 </Box>
                 <Table>
@@ -133,5 +132,4 @@ const BooksComponent = () => {
         </div>
     );
 };
-
 export default BooksComponent;
