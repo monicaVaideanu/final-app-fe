@@ -236,9 +236,11 @@ const Book = () => {
                                                         <StarRateIcon color="primary" />
                                                         <Typography variant="caption"> {review.rating}</Typography>
                                                     </Box>
-                                                    <Button key={review.id} color="secondary" variant="contained" startIcon={<DeleteIcon />} onClick={() => handleDeleteReview(review.userId, review.bookId)}>
-                                                    Delete Review
-                                                </Button>
+                                                    {token && userRole === 'ADMIN' && (
+                                                        <Button key={review.id} color="secondary" variant="contained" startIcon={<DeleteIcon />} onClick={() => handleDeleteReview(review.userId, review.bookId)}>
+                                                            Delete Review
+                                                        </Button>
+                                                    )}
                                                 </Box>
                                             ))
                                         

@@ -4,6 +4,7 @@ import TopAppBar from '../utils/TopAppBar';
 import AppDrawer from '../utils/AppDrawer';
 import { getAllBooks, getCollections, getGenres, getLanguages } from '../apis/GetData';
 import Footer from '../utils/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const BooksComponent = () => {
     const [genre, setGenre] = useState('');
@@ -15,7 +16,12 @@ const BooksComponent = () => {
     const [fetchedGenres, setFetchedGenres] = useState([]);
     const [fetchedCollections, setFetchedCollections] = useState([]);
     const [fetchedLanguages, setFetchedLanguages] = useState([]);
+    const navigate = useNavigate();
 
+    const handleRowClick = (bookId) => {
+        console.log(`Clicked on book: ${bookId}`);
+        navigate(`/book/${bookId}`);
+      };
     const handleSearch = () => {
         let filteredBooks = allBooks;
     
@@ -124,7 +130,7 @@ const BooksComponent = () => {
                     </TableHead>
                     <TableBody>
                         {displayBooks.map((book, index) => (
-                            <TableRow key={index}>
+                            <TableRow key={index} hover onClick={() => handleRowClick(book.bookId)} style={{ cursor: 'pointer' }}>
                                 <TableCell>{book.name}</TableCell>
                                 <TableCell>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(", ")}</TableCell>
                                 <TableCell>{book.genres.map(g => g.genreName).join(", ")}</TableCell>
