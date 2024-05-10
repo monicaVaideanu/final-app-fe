@@ -19,20 +19,26 @@ const BooksComponent = () => {
     const handleSearch = () => {
         let filteredBooks = allBooks;
     
+        console.log("Starting filter on books:", allBooks);
+    
         if (genre && genre !== 'All') {
-            filteredBooks = filteredBooks.filter(book => book.genres && book.genres.some(g => g.name === genre));
+            filteredBooks = filteredBooks.filter(book =>
+                book.genres && book.genres.some(g => g.genreName === genre));
+            console.log("After genre filter:", filteredBooks);
         }
-    
         if (collection && collection !== 'All') {
-            filteredBooks = filteredBooks.filter(book => book.collectionName === collection);
+            filteredBooks = filteredBooks.filter(book =>
+                book.collection && book.collection.name === collection);
+            console.log("After collection filter:", filteredBooks);
         }
-    
         if (language && language !== 'All') {
-            filteredBooks = filteredBooks.filter(book => book.languages && book.languages.some(l => l.code === language));
+            filteredBooks = filteredBooks.filter(book =>
+                book.languages && book.languages.some(l => l.languageName === language));
+            console.log("After language filter:", filteredBooks);
         }
-    
         setDisplayBooks(filteredBooks);
     };
+    
     
     useEffect(() => {
         const fetchData = async () => {
@@ -47,6 +53,7 @@ const BooksComponent = () => {
                 setFetchedGenres(genresResponse.data);
                 setFetchedCollections(collectionsResponse.data);
                 setFetchedLanguages(languagesResponse.data);
+                console.log(languagesResponse.data)
                 setAllBooks(booksResponse.data || []);
                 setDisplayBooks(booksResponse.data || []);
             } catch (fetchError) {
@@ -120,8 +127,8 @@ const BooksComponent = () => {
                             <TableRow key={index}>
                                 <TableCell>{book.name}</TableCell>
                                 <TableCell>{book.authors.map(author => `${author.firstName} ${author.lastName}`).join(", ")}</TableCell>
-                                <TableCell>{book.genres.map(g => g.name).join(", ")}</TableCell>
-                                <TableCell>{book.collectionName}</TableCell>
+                                <TableCell>{book.genres.map(g => g.genreName).join(", ")}</TableCell>
+                                <TableCell>{book.collection ? book.collection.name : 'No Collection'}</TableCell>
                                 <TableCell>{book.languages.map(l => l.code).join(", ")}</TableCell>
                                 <TableCell>{book.yearPublication}</TableCell>
                             </TableRow>

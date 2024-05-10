@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const TopAppBar = () => {
   const navigate = useNavigate();
   
-  const isLoggedIn = !!localStorage.getItem('userToken');  // Verifică dacă utilizatorul este logat
+  const isLoggedIn = !!localStorage.getItem('userToken');
   
   const goToLogin = () => navigate('/login');
   const goToRegister = () => navigate('/register');
@@ -17,9 +17,11 @@ const TopAppBar = () => {
   const goToProfile = () => navigate('/profile');
   
   const handleLogout = () => {
-    localStorage.removeItem('userToken'); // Șterge tokenul JWT
-    navigate('/login'); // Redirecționează către pagina de login
-    window.location.reload(); // Reîncarcă pagina pentru a actualiza UI-ul
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userId');
+    navigate('/home');
+    window.location.reload();
   };
 
   return (
