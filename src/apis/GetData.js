@@ -12,6 +12,7 @@ export const getAllBooks = () => axios.get(`${BASE_API_BOOKS}/all`);
 export const getGenres = () => axios.get(`${BASE_API_BOOKS}/getGenres`);
 export const getLanguages = () => axios.get(`${BASE_API_BOOKS}/getLanguages`);
 export const getCollections = () => axios.get(`${BASE_API_BOOKS}/getCollections`);
+export const getAllAuthors = () => axios.get(`${BASE_API_AUTHOR}/all`);
 
 export const acceptBook = (bookId, token) => {
   return axios.post(`${BASE_API_ADMIN}/accept/${bookId}`, {}, {
