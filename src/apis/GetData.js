@@ -19,7 +19,7 @@ export const getReviewsForBook = (bookId) => axios.get(`${BASE_API_BOOKS}/review
 
 
 export const addReview = ( bookId, userId, reviewDto, token)  => {
-  return axios.post(`API_ENDPOINT/${bookId}/addReview/${userId}`, reviewDto, {
+  return axios.post(`${BASE_API_BOOKS}/${bookId}/addReview/${userId}`, reviewDto, {
   headers: {
       Authorization: `${token}`
   }
