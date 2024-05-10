@@ -41,7 +41,7 @@ const MyProfile = () => {
   const [promotionData, setPromotionData] = useState({ description: '', country: '' });
   const userRole = localStorage.getItem('role');
   const navigate = useNavigate();
-  
+
   const fetchWishBooks = async () => {
     try {
       const response = await getWishList(userId, token);
@@ -53,10 +53,11 @@ const MyProfile = () => {
   const handleUploadBook = () => {
     navigate('/upload');
   };
+  const handleAdminPage = () => {
+    navigate('/adminPage')
+  };
   useEffect(() => {
     fetchWishBooks();
-    console.log("role myProfile" + userRole)
-    console.log("id" + userId)
   }, [userId]);
 
   const handleDeleteBook = async (bookId) => {
@@ -123,6 +124,11 @@ const MyProfile = () => {
         {(userRole === 'AUTHOR' || userRole === 'ADMIN') && (
           <Button onClick={handleUploadBook} color="primary" variant="contained">
             Upload a Book
+          </Button>
+        )}
+        {(userRole === 'ADMIN') && (
+          <Button onClick={handleAdminPage} color="primary" variant="contained">
+            Check pending books
           </Button>
         )}
         <Button onClick={() => setDialogOpen(true)} color="secondary">Delete all list</Button>

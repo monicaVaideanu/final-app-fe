@@ -11,6 +11,7 @@ import AboutUsComponent from './components/AboutUsComponent';
 import ContactComponent from './components/ContactComponent';
 import UploadBook from './components/UploadBook';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminBooksPage from './components/AdminBookPage';
 function App() {
   return (
     <div className="App">
@@ -25,12 +26,17 @@ function App() {
               <Route path="/profile" element={<MyProfile/>} />
               <Route path="/about" element={<AboutUsComponent/>} />
               <Route path="/contact" element={<ContactComponent/>} />
+              <Route path="/adminPage" element={<AdminBooksPage/>} />
               <Route path="/upload" element={
                 <ProtectedRoute roles={['AUTHOR', 'ADMIN']}>
                   <UploadBook />
                 </ProtectedRoute>
               } />
-              {/* <ProtectedRoute path="/upload" element={<UploadBook/>} roles= {['AUTHOR','ADMIN']}/> */}
+              <Route path="/adminPage" element={
+                <ProtectedRoute roles={['ADMIN']}>
+                  <AdminBooksPage />
+                </ProtectedRoute>
+              } />
       </Routes>
       <Footer/>
     </div>
