@@ -15,6 +15,7 @@ export const getCollections = () => axios.get(`${BASE_API_BOOKS}/getCollections`
 export const getAllAuthors = () => axios.get(`${BASE_API_AUTHOR}/all`);
 
 export const getBook = (bookId) => axios.get(`${BASE_API_BOOKS}/${bookId}`);
+export const getReviewsForBook = (bookId) => axios.get(`${BASE_API_BOOKS}/review/${bookId}`);
 
 export const acceptBook = (bookId, token) => {
   return axios.post(`${BASE_API_ADMIN}/accept/${bookId}`, {}, {
@@ -53,7 +54,7 @@ export const getWishList = (userId, token) => {
 };
 
 export const deleteFromWishList = (userId, token, bookId) => {
-    return axios.delete(`${BASE_API_BOOKS_LIST}/delete/${userId}/${bookId}`, {//delete/{userId}/{bookId}
+    return axios.delete(`${BASE_API_BOOKS_LIST}/delete/${userId}/${bookId}`, {
       headers: {
         Authorization: `${token}`
       }

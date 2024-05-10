@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
+  
   useEffect(() => {
     getTopTen().then((response) => {
         setBooks(response.data)
@@ -19,10 +20,10 @@ const HomePage = () => {
    });
 }, []);
 
-  const handleRowClick = (bookId) => {
-    console.log(`Clicked on book: ${bookId}`);
-    navigate('/book/${bookId}')
-  };
+const handleRowClick = (bookId) => {
+  console.log(`Clicked on book: ${bookId}`);
+  navigate(`/book/${bookId}`);
+};
 
   return (
     <div style={{ backgroundColor: '#e8f5e9' }}>
