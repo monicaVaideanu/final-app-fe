@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Paper, TableBody, TableCell, TableContainer, Table, TableHead, TableRow, Container, IconButton } from '@mui/material';
+import {Divider, Box, Typography, Paper, TableBody, TableCell, TableContainer, Table, TableHead, TableRow, Container, IconButton } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import TopAppBar from '../utils/TopAppBar';
@@ -84,15 +84,16 @@ const Book = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <Divider style={{ margin: '20px 0' , backgroundColor: '#e8f5e9' }} />
                     <Typography variant="h6" style={{ margin: '20px 0' }}>Reviews</Typography>
                     {reviews.length > 0 ? (
                         reviews.map((review, index) => (
                             <Box key={index} style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>
-                                <Typography variant="subtitle1"><strong>{review.username}</strong> ({new Date(review.publishedDate).toLocaleDateString()})</Typography>
+                                <Typography variant="subtitle1"><strong>User:  {review.username}</strong> ({new Date(review.publishedDate).toLocaleDateString()})</Typography>
                                 <Typography>{review.reviewText}</Typography>
                                 <Box display="flex" alignItems="center">
                                     <StarRateIcon color="primary" />
-                                    <Typography variant="caption">{review.rating}</Typography>
+                                    <Typography variant="caption"> {review.rating}</Typography>
                                 </Box>
                             </Box>
                         ))

@@ -17,6 +17,14 @@ export const getAllAuthors = () => axios.get(`${BASE_API_AUTHOR}/all`);
 export const getBook = (bookId) => axios.get(`${BASE_API_BOOKS}/${bookId}`);
 export const getReviewsForBook = (bookId) => axios.get(`${BASE_API_BOOKS}/review/${bookId}`);
 
+
+export const addReview = ( bookId, userId, reviewDto, token)  => {
+  return axios.post(`API_ENDPOINT/${bookId}/addReview/${userId}`, reviewDto, {
+  headers: {
+      Authorization: `${token}`
+  }
+})};
+
 export const acceptBook = (bookId, token) => {
   return axios.post(`${BASE_API_ADMIN}/accept/${bookId}`, {}, {
     headers: {
