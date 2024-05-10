@@ -27,11 +27,17 @@ const TopAppBar = () => {
   return (
     <AppBar position="static" color="default" sx={{ backgroundColor: '#b2dfdb' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Typography variant="h6" color="inherit" onClick={goToHome} style={{ cursor: 'pointer' }}>
+        <Typography variant="h5" color="inherit" onClick={goToHome} style={{ cursor: 'pointer' }}>
           Great Reads
         </Typography>
-        <Box sx={{ backgroundColor: '#b2dfdb', padding: '10px', justifyContent: 'center' }}>
-          <Typography variant="h10" color="inherit">
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center', 
+          backgroundColor: '#b2dfdb',
+          padding: '10px'
+        }}>
+          <Typography variant="h6" color="inherit">
             The place where you find your next read.
           </Typography>
         </Box>

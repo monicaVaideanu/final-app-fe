@@ -6,8 +6,10 @@ import { getTopTen } from '../apis/GetData';
 import b1 from '../pictures/b1.jpg'
 import b2 from '../pictures/b2.webp'
 import b3 from '../pictures/b3.jpg'
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   useEffect(() => {
     getTopTen().then((response) => {
@@ -17,9 +19,9 @@ const HomePage = () => {
    });
 }, []);
 
-  const handleRowClick = (bookName) => {
-    console.log(`Clicked on book: ${bookName}`);
-    // Send to book page (could be implemented later)
+  const handleRowClick = (bookId) => {
+    console.log(`Clicked on book: ${bookId}`);
+    navigate('/book/${bookId}')
   };
 
   return (
@@ -53,9 +55,9 @@ const HomePage = () => {
             <TableBody>
               {books.map((book) => (
                 <TableRow
-                  key={book.name}
+                  key={book.bookId}
                   sx={{ '&:hover': { cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0.04)' } }}
-                  onClick={() => handleRowClick(book.name)}
+                  onClick={() => handleRowClick(book.bookId)}
                 >
                   <TableCell component="th" scope="row">
                     {book.name}
