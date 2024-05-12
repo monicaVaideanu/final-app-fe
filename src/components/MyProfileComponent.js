@@ -50,6 +50,9 @@ const MyProfile = () => {
       setError(error.message);
     }
   };
+  const handleAddNewGenre = () => {
+    navigate('/addGenre')
+  }
   const handleUploadBook = () => {
     navigate('/upload');
   };
@@ -129,6 +132,11 @@ const MyProfile = () => {
         {(userRole === 'ADMIN') && (
           <Button onClick={handleAdminPage} color="primary" variant="contained">
             Check pending books
+          </Button>
+        )}
+        {userRole === 'ADMIN' && (
+          <Button onClick={handleAddNewGenre} color="primary">
+            Add new genre
           </Button>
         )}
         <Button onClick={() => setDialogOpen(true)} color="secondary">Delete all list</Button>

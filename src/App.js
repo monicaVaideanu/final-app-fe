@@ -13,6 +13,7 @@ import UploadBook from './components/UploadBook';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminBooksPage from './components/AdminBookPage';
 import Book from './components/Book';
+import AddGenre from './components/AddGenre';
 function App() {
   return (
     <div className="App">
@@ -29,6 +30,7 @@ function App() {
               <Route path="/contact" element={<ContactComponent/>} />
               <Route path="/adminPage" element={<AdminBooksPage/>} />
               <Route path="/book/:bookId"  element={<Book/>} />
+              <Route path="/addGenre"  element={<AddGenre/>} />
               <Route path="/upload" element={
                 <ProtectedRoute roles={['AUTHOR', 'ADMIN']}>
                   <UploadBook />

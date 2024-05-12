@@ -9,10 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const AppDrawer = () => {
     const [open, setOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const handleSearchChange = (event) => setSearchTerm(event.target.value);
     const navigate = useNavigate();
-    
-    const handleSearch = () => console.log(`Searching for: ${searchTerm}`);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
@@ -28,20 +25,6 @@ const AppDrawer = () => {
             <Drawer anchor='left' open={open} onClose={toggleDrawer(false)}>
                 <Box sx={{ width: 250, backgroundColor: '#b2dfdb', cursor: 'pointer', }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
                     <Box sx={{ p: 2 }}>
-                        <TextField
-                            fullWidth
-                            variant="outlined"
-                            placeholder="Search..."
-                            value={searchTerm}
-                            onChange={handleSearchChange}
-                            InputProps={{
-                                endAdornment: (
-                                    <IconButton onClick={handleSearch}>
-                                        <SearchIcon />
-                                    </IconButton>
-                                ),
-                            }}
-                        />
                     </Box>
                     <List>
                         <ListItem onClick={goToBooks}>
