@@ -24,6 +24,12 @@ export const addNewGenre = (genreDto, token) => {
       Authorization: `${token}`
   }})
 }
+export const addNewCollection = (collectionDto, token) => {
+  return axios.post(`${BASE_API_ADMIN}/addCollection`, collectionDto,{
+    headers: {
+      Authorization: `${token}`
+  }})
+}
 
 export const addReview = ( bookId, userId, reviewDto, token)  => {
   return axios.post(`${BASE_API_BOOKS}/${bookId}/addReview/${userId}`, reviewDto, {
