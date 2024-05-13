@@ -75,6 +75,8 @@ const UploadBook = () => {
     }, []);
 
     const handleFileChange = (e) => {
+
+        
         setBookData({
             ...bookData,
             pdfContent: e.target.files[0],
@@ -85,16 +87,28 @@ const UploadBook = () => {
         e.preventDefault();
         const formData = new FormData();
         console.log("BookData" + bookData)
-        formData.append('bookDto', new Blob([JSON.stringify(bookData)], { type: "application/json" }));
+        
+        
+        var bookData2 = { ...bookData }
+        delete bookData2.pdfContent
+
+        formData.append('bookDto', new Blob([JSON.stringify(bookData2)], { type: "application/json" }));
+        
+        
         if (bookData.pdfContent) {
             formData.append('file', bookData.pdfContent);
+            
         }
-        console.log("FormData" + formData)
+
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
         try {
             const response = await axios.post('http://localhost:8081/book/create', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    Authorization: `${localStorage.getItem('userToken')}`, 
+                    Authorization : localStorage.getItem('userToken')
                 },
             });
             alert('Book uploaded successfully!');
@@ -102,7 +116,6 @@ const UploadBook = () => {
             alert('Failed to upload book: ' + error.response.data);
         }
     };
-
     return (
         <div style={{ backgroundColor: '#e8f5e9' }}> 
         <TopAppBar/>

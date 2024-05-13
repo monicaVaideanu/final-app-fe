@@ -84,7 +84,6 @@ const Book = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log('Book added to wishlist successfully!');
             alert('Book added to wishlist successfully!');
         } catch (error) {
             console.error('Failed to add book to wishlist:', error);
@@ -259,7 +258,7 @@ const Book = () => {
                                                 sx={{ boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)' }}
                                             >
                                                 {[...Array(50).keys()].map(value => (
-                                                    <MenuItem key={value+1} value={value+1 / 10}>{(value+1 / 10).toFixed(1)}</MenuItem>
+                                                    <MenuItem key={value} value={value / 10}>{(value / 10).toFixed(1)}</MenuItem>
                                                 ))}
                                             </Select>
                                             <TextField

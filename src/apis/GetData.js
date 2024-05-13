@@ -24,6 +24,14 @@ export const addNewGenre = (genreDto, token) => {
       Authorization: `${token}`
   }})
 }
+export const getAllPendingBooks = (token) => {
+  return axios.get(`${BASE_API_BOOKS}/getAllPending`, {
+ headers: {
+    Authorization: `${token}`
+  }
+})};
+
+
 export const addNewCollection = (collectionDto, token) => {
   return axios.post(`${BASE_API_ADMIN}/addCollection`, collectionDto,{
     headers: {

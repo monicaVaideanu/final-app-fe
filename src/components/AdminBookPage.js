@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllBooks, acceptBook, rejectBook } from  '../apis/GetData';
+import { getAllPendingBooks, acceptBook, rejectBook } from  '../apis/GetData';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,7 +16,7 @@ const AdminBooksPage = () => {
   const token = localStorage.getItem('userToken');
 
   useEffect(() => {
-    getAllBooks().then(response => {
+    getAllPendingBooks().then(response => {
       console.log("Data received:", response.data);
       const pendingBooks = response.data.filter(book => book.status === 'PENDING');
       setBooks(pendingBooks);
@@ -37,8 +37,6 @@ const AdminBooksPage = () => {
     }).catch(error => console.error('Error rejecting book:', error));
   };
   
-  
-
   return (
     <div style={{ backgroundColor: '#e8f5e9' }}>
     <TopAppBar />
