@@ -124,6 +124,8 @@ const Book = () => {
         }
     };
     const handleReviewSubmit = async (e) => {
+        console.log("BOOKID:" + bookId)
+        console.log("USERID:" + userId)
         e.preventDefault();
         if (!token) {
             alert('Please log in to submit a review.');
@@ -139,6 +141,8 @@ const Book = () => {
 
         try {
             await addReview(bookId, userId, reviewDto, token);
+            console.log("BOOKID:" + bookId)
+            console.log("USERID:" + userId)
             setReviews([...reviews, { ...reviewDto }]);
             setReviewText('');
             setRating(1);
@@ -257,9 +261,12 @@ const Book = () => {
                                                 margin="normal"
                                                 sx={{ boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)' }}
                                             >
-                                                {[...Array(50).keys()].map(value => (
-                                                    <MenuItem key={value} value={value / 10}>{(value / 10).toFixed(1)}</MenuItem>
-                                                ))}
+                                                {[...Array(50).keys()].map(index => {
+                                                    const value = (index + 1) / 10;
+                                                    return (
+                                                        <MenuItem key={value} value={value}>{value.toFixed(1)}</MenuItem>
+                                                    );
+                                                })}
                                             </Select>
                                             <TextField
                                                 label="Your Review"

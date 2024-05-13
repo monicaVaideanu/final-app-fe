@@ -27,6 +27,7 @@ const LoginComponent = () => {
       console.log(response.data);
       console.log("Role?"+ localStorage.getItem("role"));
       console.log("Setting localStorage - Role:", role);
+      console.log(userId)
       localStorage.setItem('role', role);
       console.log("Role stored in localStorage:", localStorage.getItem('role'));
       setLoggedIn(true);
